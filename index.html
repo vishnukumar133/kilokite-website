@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071b35">
+<title>KiloKite | Every Unit. Smarter Insights.</title>
+<style>
+:root {
+  --navy:#071b35;
+  --navy2:#102c4b;
+  --green:#20c783;
+  --cyan:#21c5e8;
+  --light:#f3f8fb;
+  --text:#18304b;
+  --muted:#708197;
+  --white:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--light);color:var(--text)}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font:inherit}
+nav{
+ position:sticky;top:0;z-index:100;
+ display:flex;justify-content:space-between;align-items:center;
+ padding:18px 7%;background:rgba(7,27,53,.97);
+ color:white;gap:20px;flex-wrap:wrap
+}
+.logo{font-size:27px;font-weight:800;letter-spacing:-1px}
+.logo span{color:var(--green)}
+.navlinks{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.navlinks a{font-size:14px;color:#dce8f5}
+.navlinks a:hover{color:var(--green)}
+.hero{
+ min-height:610px;padding:90px 8%;
+ display:grid;grid-template-columns:1.1fr .9fr;
+ align-items:center;gap:55px;
+ background:radial-gradient(circle at 80% 30%,#174b65 0%,transparent 35%),
+ linear-gradient(120deg,#06172e,#102d4b);
+ color:white;overflow:hidden
+}
+.tag{color:var(--green);font-size:13px;font-weight:bold;letter-spacing:3px;text-transform:uppercase}
+.hero h1{font-size:clamp(42px,6vw,68px);line-height:1.08;margin:20px 0}
+.hero h1 span{color:var(--green)}
+.hero p{font-size:17px;color:#c4d3e2;line-height:1.8;max-width:550px}
+.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.btn{padding:14px 23px;border:0;border-radius:8px;font-weight:bold;transition:.25s}
+.btn:hover{transform:translateY(-3px)}
+.primary{background:var(--green);color:#05213a}
+.secondary{border:1px solid #8ba7be;color:white;background:transparent}
+.dashboard-art{
+ background:rgba(255,255,255,.08);border:1px solid #52718c;
+ padding:25px;border-radius:20px;box-shadow:0 25px 70px #0005;
+ transform:rotate(1deg)
+}
+.art-top{display:flex;justify-content:space-between;color:#dceafa;margin-bottom:24px}
+.metric{background:#183b58;padding:20px;border-radius:12px;margin-bottom:14px}
+.metric small{color:#b8cad9}
+.metric h2{font-size:34px;color:var(--green);margin-top:8px}
+.bars{height:125px;display:flex;align-items:end;gap:12px;padding:10px}
+.bars i{flex:1;border-radius:5px 5px 0 0;background:linear-gradient(var(--cyan),var(--green))}
+section{padding:85px 8%}
+.section-title{text-align:center;margin-bottom:45px}
+.section-title h2{font-size:36px;color:var(--navy);margin-bottom:12px}
+.section-title p{color:var(--muted);line-height:1.7}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:stretch}
+.about-card{padding:35px;border-radius:16px;background:white;box-shadow:0 8px 30px #18304b0b}
+.about-card h3{color:var(--navy);margin-bottom:15px;font-size:23px}
+.about-card p{line-height:1.8;color:var(--muted)}
+.solutions{background:#fff}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{padding:27px;background:var(--light);border:1px solid #e4edf3;border-radius:15px;transition:.3s}
+.card:hover{transform:translateY(-7px);box-shadow:0 12px 30px #0b2a4515}
+.card .emoji{font-size:35px;margin-bottom:17px}
+.card h3{font-size:18px;margin-bottom:10px;color:var(--navy)}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.dashboard{background:var(--navy);color:white}
+.dashboard .section-title h2{color:white}
+.dashboard .section-title p{color:#b9cad9}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:25px}
+.stat{padding:24px;background:#153653;border:1px solid #31516a;border-radius:13px}
+.stat small{color:#b6c9d8}
+.stat h2{margin-top:12px;color:var(--green);font-size:29px}
+.chartbox{background:#fff;color:var(--navy);padding:25px;border-radius:15px}
+.chartbox h3{margin-bottom:20px}
+.chart{width:100%;height:220px;display:block}
+.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}
+.tip{padding:18px;background:#153653;border-radius:10px;color:#d9e8f4;line-height:1.6}
+.tip b{color:var(--green);display:block;margin-bottom:8px}
+.calculator{background:#fff}
+.calc-wrap{max-width:750px;margin:auto;background:var(--light);padding:35px;border-radius:18px}
+.field{margin-bottom:20px}
+.field label{display:block;font-weight:bold;margin-bottom:9px}
+.field input,.contact input,.contact textarea{
+ width:100%;padding:14px;border:1px solid #d4e0e9;border-radius:8px;
+ font-size:16px;background:white;outline:none
+}
+.field input:focus,.contact input:focus,.contact textarea:focus{border-color:var(--green)}
+.result{margin-top:20px;padding:24px;background:var(--navy);border-radius:12px;color:white}
+.result h2{color:var(--green);margin:10px 0}
+.result p{line-height:1.8;color:#d1dfeb}
+.why{background:var(--light)}
+.why-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:15px}
+.why-item{text-align:center;padding:22px 12px;background:white;border-radius:13px}
+.why-item span{font-size:30px}
+.why-item h3{font-size:15px;margin-top:14px;color:var(--navy)}
+.contact{background:white}
+.contact-wrap{max-width:650px;margin:auto}
+.contact textarea{height:140px;resize:vertical}
+#message-status{margin-top:15px;color:#128b5b;font-weight:bold}
+footer{background:#06172e;color:#d3dfeb;padding:50px 8% 20px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:35px}
+footer h3{color:white;margin-bottom:16px}
+footer p,footer a{font-size:14px;line-height:2;color:#aabdd0;display:block}
+footer a:hover{color:var(--green)}
+.copyright{text-align:center;border-top:1px solid #29435b;margin-top:35px;padding-top:20px;color:#93a9bd;font-size:13px}
+@media(max-width:850px){
+ .hero{grid-template-columns:1fr;padding:70px 7%}
+ .cards{grid-template-columns:repeat(2,1fr)}
+ .why-grid{grid-template-columns:repeat(2,1fr)}
+ .stats{grid-template-columns:1fr}
+ .tips{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+ nav{justify-content:center}
+ .navlinks{justify-content:center;gap:13px}
+ .navlinks a{font-size:12px}
+ section{padding:65px 6%}
+ .about,.cards,.footer-grid{grid-template-columns:1fr}
+ .hero h1{font-size:43px}
+ .section-title h2{font-size:29px}
+ .dashboard-art{padding:16px}
+ .calc-wrap{padding:22px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+ <a href="#home" class="logo">Kilo<span>Kite</span></a>
+ <div class="navlinks">
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#solutions">Solutions</a>
+  <a href="#dashboard">Dashboard</a>
+  <a href="#calculator">Calculator</a>
+  <a href="#contact">Contact</a>
+ </div>
+</nav>
+
+<header class="hero" id="home">
+ <div>
+  <div class="tag">Smart Energy Technology</div>
+  <h1>Power Smarter.<br><span>Save Better.</span></h1>
+  <p>Understand your electricity usage, discover energy-saving opportunities and make smarter energy decisions.</p>
+  <div class="actions">
+   <a href="#solutions" class="btn primary">Explore Solutions →</a>
+   <a href="#calculator" class="btn secondary">Calculate Savings</a>
+  </div>
+  <p style="margin-top:25px;font-size:13px">EVERY UNIT. SMARTER INSIGHTS.</p>
+ </div>
+ <div class="dashboard-art">
+  <div class="art-top"><b>⚡ Energy Overview</b><span>● Live Demo</span></div>
+  <div class="metric"><small>Monthly Energy Consumption</small><h2>245.8 kWh</h2><small>Sample dashboard data</small></div>
+  <div class="metric"><small>Estimated Electricity Bill</small><h2>₹ 1,475</h2><small>Based on sample rate</small></div>
+  <div class="metric">
+   <small>Weekly Energy Usage</small>
+   <div class="bars">
+    <i style="height:45%"></i><i style="height:70%"></i>
+    <i style="height:55%"></i><i style="height:90%"></i>
+    <i style="height:65%"></i><i style="height:80%"></i>
+    <i style="height:50%"></i>
+   </div>
+  </div>
+ </div>
+</header>
+
+<section id="about">
+ <div class="section-title">
+  <div class="tag">Who We Are</div>
+  <h2>About KiloKite</h2>
+  <p>Making electricity understanding easier through smart technology.</p>
+ </div>
+ <div class="about">
+  <div class="about-card">
+   <h3>⚡ About Us</h3>
+   <p>KiloKite is a smart energy technology concept designed to help households and businesses understand their electricity consumption. We turn energy usage information into simple insights and practical recommendations.</p>
+  </div>
+  <div class="about-card">
+   <h3>🎯 Our Mission</h3>
+   <p>To make energy usage smarter, simpler and more efficient.</p>
+   <br>
+   <h3>🌍 Our Vision</h3>
+   <p>To create a future where everyone can understand and optimize their energy consumption.</p>
+  </div>
+ </div>
+</section>
+
+<section class="solutions" id="solutions">
+ <div class="section-title">
+  <div class="tag">What We Offer</div>
+  <h2>Our Smart Solutions</h2>
+  <p>Simple tools to help you make better energy decisions.</p>
+ </div>
+ <div class="cards">
+  <div class="card"><div class="emoji">⚡</div><h3>Smart Electricity Monitoring</h3><p>Understand your electricity usage and track energy consumption.</p></div>
+  <div class="card"><div class="emoji">📊</div><h3>Energy Consumption Analysis</h3><p>Analyze electricity usage patterns and identify high-consumption periods.</p></div>
+  <div class="card"><div class="emoji">💰</div><h3>Electricity Bill Estimation</h3><p>Estimate your electricity costs using consumption and unit rates.</p></div>
+  <div class="card"><div class="emoji">🌱</div><h3>Energy Saving Recommendations</h3><p>Discover practical ways to reduce unnecessary electricity usage.</p></div>
+  <div class="card"><div class="emoji">📈</div><h3>Usage Reports and Insights</h3><p>View simple energy reports to understand your usage trends.</p></div>
+ </div>
+</section>
+
+<section class="dashboard" id="dashboard">
+ <div class="section-title">
+  <div class="tag">Interactive Demo</div>
+  <h2>Smart Energy Dashboard</h2>
+  <p>Explore a sample energy dashboard with illustrative data.</p>
+ </div>
+ <div class="stats">
+  <div class="stat"><small>Total Consumption</small><h2>245.8 kWh</h2></div>
+  <div class="stat"><small>Estimated Bill</small><h2>₹1,475</h2></div>
+  <div class="stat"><small>Potential Savings</small><h2>₹221</h2></div>
+ </div>
+ <div class="chartbox">
+  <h3>Weekly Electricity Usage (kWh)</h3>
+  <canvas id="usageChart" class="chart"></canvas>
+  <p style="color:#708197;font-size:12px;margin-top:10px">Illustrative sample data – Monday to Sunday.</p>
+ </div>
+ <div class="tips">
+  <div class="tip"><b>💡 Tip 01</b>Switch off unused lights and electrical appliances.</div>
+  <div class="tip"><b>🌿 Tip 02</b>Choose energy-efficient appliances when possible.</div>
+  <div class="tip"><b>🔌 Tip 03</b>Avoid leaving devices on standby unnecessarily.</div>
+ </div>
+</section>
+
+<section class="calculator" id="calculator">
+ <div class="section-title">
+  <div class="tag">Save More Energy</div>
+  <h2>Energy Savings Calculator</h2>
+  <p>Estimate your monthly bill and possible savings.</p>
+ </div>
+ <div class="calc-wrap">
+  <div class="field">
+   <label for="units">Monthly Electricity Consumption (kWh)</label>
+   <input type="number" id="units" min="0" step="0.1" value="250">
+  </div>
+  <div class="field">
+   <label for="rate">Electricity Rate per Unit (₹)</label>
+   <input type="number" id="rate" min="0" step="0.01" value="6">
+  </div>
+  <button class="btn primary" style="width:100%" onclick="calculate()">Calculate My Bill →</button>
+  <div class="result" aria-live="polite">
+   <p>Estimated Monthly Electricity Bill</p>
+   <h2 id="bill">₹1,500.00</h2>
+   <p>Possible Savings (15% sample assumption)</p>
+   <h2 id="saving">₹225.00</h2>
+   <p id="after">Estimated bill after savings: ₹1,275.00</p>
+   <p style="font-size:12px;margin-top:12px">Estimate only. Actual bills may include fixed charges, taxes, subsidies and slab-based tariffs. The 15% saving is an illustrative assumption, not a guarantee.</p>
+  </div>
+ </div>
+</section>
+
+<section class="why">
+ <div class="section-title">
+  <div class="tag">Our Advantage</div>
+  <h2>Why Choose KiloKite?</h2>
+  <p>Smarter energy understanding made simple.</p>
+ </div>
+ <div class="why-grid">
+  <div class="why-item"><span>👌</span><h3>Simple and User-Friendly</h3></div>
+  <div class="why-item"><span>🧠</span><h3>Smart Energy Insights</h3></div>
+  <div class="why-item"><span>💸</span><h3>Cost-Saving Recommendations</h3></div>
+  <div class="why-item"><span>🚀</span><h3>Modern Technology</h3></div>
+  <div class="why-item"><span>📑</span><h3>Easy-to-Understand Reports</h3></div>
+ </div>
+</section>
+
+<section class="contact" id="contact">
+ <div class="section-title">
+  <div class="tag">Get In Touch</div>
+  <h2>Contact Us</h2>
+  <p>Have a question or idea? Send us a message.</p>
+ </div>
+ <form class="contact-wrap" id="contactForm">
+  <div class="field"><label for="name">Your Name</label><input id="name" type="text" placeholder="Enter your name" required maxlength="80"></div>
+  <div class="field"><label for="email">Email Address</label><input id="email" type="email" placeholder="Enter your email" required></div>
+  <div class="field"><label for="message">Your Message</label><textarea id="message" placeholder="Write your message..." required maxlength="2000"></textarea></div>
+  <button type="submit" class="btn primary" style="width:100%">Submit Message →</button>
+  <p id="message-status" role="status"></p>
+ </form>
+ <p style="text-align:center;font-size:12px;color:#708197;margin-top:15px">Demo contact form. Messages are not transmitted or stored.</p>
+</section>
+
+<footer>
+ <div class="footer-grid">
+  <div>
+   <div class="logo">Kilo<span>Kite</span></div>
+   <p>Every Unit. Smarter Insights.</p>
+   <p>Smart energy technology for a more efficient future.</p>
+  </div>
+  <div>
+   <h3>Quick Links</h3>
+   <a href="#home">Home</a><a href="#about">About Us</a>
+   <a href="#solutions">Solutions</a><a href="#dashboard">Dashboard</a>
+   <a href="#calculator">Calculator</a>
+  </div>
+  <div>
+   <h3>Explore</h3>
+   <a href="#why">Why KiloKite</a>
+   <a href="#contact">Contact Us</a>
+   <p>Smart Energy Technology</p>
+  </div>
+ </div>
+ <div class="copyright">© 2026 KiloKite. All Rights Reserved.</div>
+</footer>
+
+<script>
+function calculate(){
+ const units=Number(document.getElementById('units').value);
+ const rate=Number(document.getElementById('rate').value);
+ if(!Number.isFinite(units)||!Number.isFinite(rate)||units<0||rate<0){
+  alert("Please enter valid non-negative numbers.");
+  return;
+ }
+ const bill=units*rate;
+ const savings=bill*0.15;
+ document.getElementById('bill').textContent="₹"+bill.toFixed(2);
+ document.getElementById('saving').textContent="₹"+savings.toFixed(2);
+ document.getElementById('after').textContent=
+ "Estimated bill after savings: ₹"+(bill-savings).toFixed(2);
+}
+document.getElementById('contactForm').addEventListener('submit',function(e){
+ e.preventDefault();
+ if(!this.reportValidity())return;
+ document.getElementById('message-status').textContent=
+ "Thank you! Your form has been validated. This demo does not send messages.";
+ this.reset();
+});
+
+function drawChart(){
+ const canvas=document.getElementById('usageChart');
+ const ctx=canvas.getContext('2d');
+ const width=canvas.clientWidth;
+ const height=220;
+ const ratio=window.devicePixelRatio||1;
+ canvas.width=width*ratio;
+ canvas.height=height*ratio;
+ ctx.scale(ratio,ratio);
+ ctx.clearRect(0,0,width,height);
+ const data=[24,32,28,40,35,48,31];
+ const labels=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+ const left=35,right=10,top=15,bottom=30;
+ const chartW=width-left-right;
+ const chartH=height-top-bottom;
+ ctx.font='12px Arial';
+ ctx.fillStyle='#708197';
+ ctx.strokeStyle='#e5edf3';
+ ctx.lineWidth=1;
+ for(let i=0;i<=4;i++){
+  let y=top+chartH*i/4;
+  ctx.beginPath();ctx.moveTo(left,y);ctx.lineTo(width-right,y);ctx.stroke();
+  ctx.fillText(String(50-i*12.5),2,y+4);
+ }
+ const gap=chartW/data.length;
+ data.forEach((v,i)=>{
+  const barH=v/50*chartH;
+  const x=left+i*gap+gap*.2;
+  const y=top+chartH-barH;
+  const gradient=ctx.createLinearGradient(0,y,0,top+chartH);
+  gradient.addColorStop(0,'#21c5e8');
+  gradient.addColorStop(1,'#20c783');
+  ctx.fillStyle=gradient;
+  ctx.beginPath();
+  ctx.roundRect(x,y,gap*.6,barH,5);
+  ctx.fill();
+  ctx.fillStyle='#708197';
+  ctx.fillText(labels[i],x+gap*.3-10,height-8);
+ });
+}
+window.addEventListener('load',drawChart);
+window.addEventListener('resize',drawChart);
+</script>
+</body>
+</html>
